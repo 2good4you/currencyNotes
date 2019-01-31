@@ -1,5 +1,6 @@
 <?php
 
+
 function givenCashMount(array $currencyNotes, int $balance, $index = 0)
 {
     $balance / current($currencyNotes) >= 1
@@ -18,7 +19,7 @@ function givenCashMount(array $currencyNotes, int $balance, $index = 0)
 
 if ($input = getopt("f:")) {
 
-    $cash = (int)$input['f'];
+    $cash = $input['f'];
     $currencyNotes = [
         500,
         200,
@@ -31,9 +32,14 @@ if ($input = getopt("f:")) {
         1,
     ];
 
+//    var_dump($cash);
+
     switch ($cash) {
+        case !is_numeric($cash) ;
+            echo "Введите целое число" . PHP_EOL;
+            break;
         case $cash > 100000 :
-            echo 'В банкомате можно получить сумму до 100 000 грн. Приносим свои извинения' . PHP_EOL;
+            echo 'В банкомате можно получить сумму от 1 - 100 000 грн. Приносим свои извинения' . PHP_EOL;
             break;
         case $cash > 0 && $cash <= 100000 :
             givenCashMount($currencyNotes, $cash);
