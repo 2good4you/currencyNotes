@@ -17,9 +17,9 @@ function givenCashMount(array $currencyNotes, int $balance, $index = 0)
     }
 }
 
-if ($input = getopt("f:")) {
+if ($input = $argv) {
 
-    $cash = $input['f'];
+    $cash = $input[1];
     $currencyNotes = [
         500,
         200,
