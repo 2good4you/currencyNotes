@@ -17,7 +17,8 @@ function givenCashMount(array $currencyNotes, int $balance, $index = 0)
     }
 }
 
-if ($input = $argv) {
+$input = $argv;
+if ( isset($input[1]) ) {
 
     $cash = $input[1];
     $currencyNotes = [
@@ -47,5 +48,5 @@ if ($input = $argv) {
     }
 
 } else {
-    echo 'Введите значение! -f ' . PHP_EOL;
+    echo 'Введите значение! ' . PHP_EOL;
 }
