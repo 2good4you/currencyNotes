@@ -1,0 +1,28 @@
+<?php
+
+function foo(array $a, int $balance)
+{
+    count($a) < 0 ? foo($a, $balance): NULL ;
+
+}
+
+$cash = 10027;
+$balance = $cash;
+$currencyNotes = [
+    500,
+    200,
+    100,
+    50,
+    20,
+    10,
+    5,
+    2,
+    1,
+];
+
+foreach ($currencyNotes as $value) {
+    $balance / $value >= 1 ? printf("%d: %d\n", $value, $balance / $value): NULL ;
+    $balance %= $value;
+}
+
+
