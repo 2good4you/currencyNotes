@@ -16,7 +16,7 @@ function givenCashMount(array $currencyNotes, int $balance, $index = 0)
     }
 }
 
-$cash = 601;
+$cash = getopt("0-9");
 $currencyNotes = [
     500,
     200,
