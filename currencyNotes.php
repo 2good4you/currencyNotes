@@ -32,8 +32,6 @@ if ($input = getopt("f:")) {
         1,
     ];
 
-//    var_dump($cash);
-
     switch ($cash) {
         case !is_numeric($cash) ;
             echo "Введите целое число" . PHP_EOL;
