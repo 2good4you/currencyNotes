@@ -18,7 +18,8 @@ function givenCashMount(array $currencyNotes, int $balance, $index = 0)
 }
 
 $input = $argv;
-if ( isset($input[1]) ) {
+
+if (isset($input[1])) {
 
     $cash = $input[1];
     $currencyNotes = [
@@ -34,7 +35,7 @@ if ( isset($input[1]) ) {
     ];
 
     switch ($cash) {
-        case !is_numeric($cash) ;
+        case !is_numeric($cash);
             echo "Введите целое число" . PHP_EOL;
             break;
         case $cash > 100000 :
