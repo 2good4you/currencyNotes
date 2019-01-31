@@ -36,9 +36,6 @@ if ($input = getopt("f:")) {
         case is_float($cash):
             echo 'Банкомат выдает только купюры. Обратитесь в кассу банка' . PHP_EOL;
             break;
-        case is_string($cash) :
-            echo 'Ты чё творишь?!' . PHP_EOL;
-            break;
         case $cash > 100000 :
             echo 'В банкомате можно получить сумму до 100 000 грн. Приносим свои извинения' . PHP_EOL;
             break;
