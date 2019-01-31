@@ -1,6 +1,5 @@
 <?php
 
-
 function givenCashMount(array $currencyNotes, int $balance, $index = 0)
 {
     $balance / current($currencyNotes) >= 1
