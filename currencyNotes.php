@@ -47,7 +47,6 @@ if (isset($input[1])) {
         default:
             echo 'Задано неверное значение' . PHP_EOL;
     }
-
 } else {
     echo 'Введите значение! ' . PHP_EOL;
 }
