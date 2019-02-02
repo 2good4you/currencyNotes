@@ -8,23 +8,27 @@ function mainMovie(string $url): void
     parse_str($parsedUrl['host'], $parsedHost);
     $hostExploaded = explode('.', $parsedUrl['host']);
 
+//    if (count($hostExploaded) === 4) {
+//
+//    } else {
 
-    $parsedUrl['tld'] = '.' . array_pop($hostExploaded);
+        $parsedUrl['tld'] = '.' . array_pop($hostExploaded);
 
-    $tlds = ["com", "co", "org", "in", "us", "gov", "mil", "int", "edu", "net", "biz", "info"];
+        $tlds = ["com", "co", "org", "in", "us", "gov", "mil", "int", "edu", "net", "biz", "info", "example"];
 
-    in_array (end($hostExploaded), $tlds )
-        ? $parsedUrl['sld'] = sprintf(".%s%s", array_pop($hostExploaded), $parsedUrl['tld'])
-        : NULL;
+        in_array(end($hostExploaded), $tlds)
+            ? $parsedUrl['sld'] = sprintf(".%s%s", array_pop($hostExploaded), $parsedUrl['tld'])
+            : NULL;
 
+        $domainParser = isset($parsedUrl['sld']) ? $parsedUrl['sld'] : $parsedUrl['tld'];
+        count($hostExploaded) <= 3
+            ? $parsedUrl['domain'] = array_pop($hostExploaded) . $domainParser
+            : NULL;
 
-    $domainParser = isset($parsedUrl['sld']) ? $parsedUrl['sld'] : $parsedUrl['tld'];
-    count($hostExploaded) <= 2
-        ? $parsedUrl['domain'] = array_pop($hostExploaded) . $domainParser
-        :NULL ;
-
-    count($hostExploaded) === 1 ? $parsedUrl['subdomain'] = current($hostExploaded): NULL;
-
+     count($hostExploaded) <= 2
+            ?$parsedUrl['subdomain'] = array_pop($hostExploaded). '.'. array_pop($hostExploaded)
+            : current($hostExploaded);
+//    }
 // извлекаем формат прикрепленного документа
     $extensionUrlFileFormat = ('/\.\w*$/');
     isset($parsedUrl['path']) ? preg_match($extensionUrlFileFormat, $parsedUrl['path'], $result) : NULL;
