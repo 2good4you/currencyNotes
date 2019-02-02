@@ -1,25 +1,50 @@
 <?php
 
-function mainMovie(string $url) : void
+function mainMovie(string $url): void
 {
+
+
     $parsedUrl = parse_url($url);
     parse_str($parsedUrl['host'], $parsedHost);
+    $hostExploaded = explode('.', $parsedUrl['host']);
+
+
+    $parsedUrl['tld'] = '.' . array_pop($hostExploaded);
+
+    $tlds = ["com", "co", "org", "in", "us", "gov", "mil", "int", "edu", "net", "biz", "info"];
+
+    in_array (end($hostExploaded), $tlds )
+        ? $parsedUrl['sld'] = sprintf(".%s%s", array_pop($hostExploaded), $parsedUrl['tld'])
+        : NULL;
+
+
+    $domainParser = isset($parsedUrl['sld']) ? $parsedUrl['sld'] : $parsedUrl['tld'];
+    count($hostExploaded) <= 2
+        ? $parsedUrl['domain'] = array_pop($hostExploaded) . $domainParser
+        :NULL ;
+
+    count($hostExploaded) === 1 ? $parsedUrl['subdomain'] = current($hostExploaded): NULL;
+
+// извлекаем формат прикрепленного документа
+    $extensionUrlFileFormat = ('/\.\w*$/');
+    isset($parsedUrl['path']) ? preg_match($extensionUrlFileFormat, $parsedUrl['path'], $result) : NULL;
+    isset($result[0]) ? $parsedUrl['extension'] = $result[0] : NULL;
 
     echo json_encode($parsedUrl, JSON_PRETTY_PRINT) . PHP_EOL;
-
-    if ( isset( $parsedUrl['query'])) {
+// если значение parsedQuery установленно, то выводим его данные
+    if (isset($parsedUrl['query'])) {
         parse_str($parsedUrl['query'], $parsedQuery);
-        echo ('{' . PHP_EOL . 'parsedQuery;' .
+        echo('{' . PHP_EOL . 'parsedQuery;' .
             json_encode($parsedQuery, JSON_PRETTY_PRINT) . PHP_EOL .
-        '}' . PHP_EOL);
+            '}' . PHP_EOL);
     }
 }
 
-$shortopts = "u:";
+$shortopts = 'u:';
 $longopts = ['url:'];
 $argv;
 
-$options = getopt($shortopts, $longopts);
+$options[] = getopt($shortopts, $longopts);
 
 switch (TRUE) {
     case isset($options['u']):
