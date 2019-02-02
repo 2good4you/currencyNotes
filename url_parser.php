@@ -26,7 +26,7 @@ function mainMovie(string $url): void
     count($hostExploaded) === 1 ? $parsedUrl['subdomain'] = current($hostExploaded): NULL;
 
 // извлекаем формат прикрепленного документа
-    $extensionUrlFileFormat = ('/.\w*\d?$/');
+    $extensionUrlFileFormat = ('/\.\w*$/');
     isset($parsedUrl['path']) ? preg_match($extensionUrlFileFormat, $parsedUrl['path'], $result) : NULL;
     isset($result[0]) ? $parsedUrl['extension'] = $result[0] : NULL;
 
